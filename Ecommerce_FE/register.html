@@ -49,7 +49,7 @@
 <body>
     <div class="register-container">
         <h2>Register</h2>
-        <form action="#" method="post">
+        <form id="registrationForm">
             <div class="form-group">
                 <label for="email">Email:</label>
                 <input type="email" id="email" name="email" required>
@@ -67,5 +67,43 @@
             </div>
         </form>
     </div>
+
+    <script>
+        document.getElementById('registrationForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Ngăn chặn gửi form mặc định
+
+            // Lấy dữ liệu từ form
+            var formData = {
+                email: document.getElementById('email').value,
+                username: document.getElementById('username').value,
+                password: document.getElementById('password').value
+            };
+
+            // Gửi yêu cầu POST đến API
+            fetch('http://localhost:3000/api/v1/auth/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Xử lý dữ liệu phản hồi (nếu cần)
+                console.log(data);
+                alert('Registration successful!');
+            })
+            .catch(error => {
+                // Xử lý lỗi
+                console.error('There was a problem with the registration:', error);
+                alert('Registration failed. Please try again later.');
+            });
+        });
+    </script>
 </body>
 </html>

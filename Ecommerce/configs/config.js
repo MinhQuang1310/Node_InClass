@@ -4,6 +4,6 @@ module.exports = {
     COOKIE_EXP: 1,
     Host: "sandbox.smtp.mailtrap.io",
     Port: 25,
-    Username:"bd43d9ed497d46",
-    Password:"f48b24f407a635"
+    Username:"fb8f91d0b43fb9",
+    Password:"8c01aabc174d4c"
 }

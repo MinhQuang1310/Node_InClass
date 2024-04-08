@@ -49,7 +49,7 @@
 <body>
     <div class="login-container">
         <h2>Login</h2>
-        <form action="#" method="post">
+        <form id="loginForm">
             <div class="form-group">
                 <label for="username">Username:</label>
                 <input type="text" id="username" name="username" required>
@@ -63,5 +63,37 @@
             </div>
         </form>
     </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Ngăn chặn gửi form mặc định
+
+            // Lấy dữ liệu từ form
+            var formData = {
+                username: document.getElementById('username').value,
+                password: document.getElementById('password').value
+            };
+
+            // Gửi yêu cầu POST đến API
+            fetch('http://localhost:3000/api/v1/auth/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                alert('Login successful!');
+            })
+            .catch(error => {
+                // Xử lý lỗi
+                console.error('There was a problem with the login:', error);
+                alert('Login failed. Please try again later.');
+            });
+        });
+    </script>
 </body>
 </html>
